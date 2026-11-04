@@ -1,0 +1,8 @@
+[profile.default]
+src = "contracts"
+test = "test"
+libs = ["lib"]
+remappings = ["forge-std/=lib/forge-std/src/"]
+
+[profile.default.fuzz]
+runs = 256

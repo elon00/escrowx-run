@@ -1,4 +1,4 @@
-﻿// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
 contract escrowxrunToken {
@@ -18,8 +18,9 @@ contract escrowxrunToken {
 
     function calculateCost(uint256 amount) public view returns (uint256) {
         uint256 currentSupply = totalSupply;
-        uint256 baseCost = amount * INITIAL_PRICE;
-        uint256 curveFactor = (CURVE_SLOPE * ((currentSupply + amount)**2 - currentSupply**2)) / 2e18;
+        // amount is token units (1e18 = one token), INITIAL_PRICE is wei per whole token
+        uint256 baseCost = amount * INITIAL_PRICE / 1e18;
+        uint256 curveFactor = (CURVE_SLOPE * ((currentSupply + amount)**2 - currentSupply**2)) / 2e36;
         return baseCost + curveFactor;
     }
 
